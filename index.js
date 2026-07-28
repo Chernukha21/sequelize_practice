@@ -1,37 +1,11 @@
-import db from './models/index.js';
-import {
-  createPhone,
-  getPhonesPage3,
-  getCurrentYearPhones,
-  getPhonesBefore2023,
-  updateRamSizeById,
-  addNfcToPhones2024,
-  deletePhoneById,
-  deletePhonesByYear2016,
-  getAverageRamSize,
-  getPhonesCountByBrand,
-  getBrandsWithMaxDiagonalMoreThan66,
-} from './queries/ phoneQueries.js';
+import http from 'http';
+import app from './app.js';
 
-async function main() {
-  try {
-    // await createPhone();
-    // await seedPhones();
-    // await getPhonesPage3();
-    // await getCurrentYearPhones();
-    // await getPhonesBefore2023();
-    // await updateRamSizeById();
-    // await addNfcToPhones2024();
-    // await deletePhoneById();
-    // await deletePhonesByYear2016();
-    // await getAverageRamSize();
-    // await getPhonesCountByBrand();
-    // await getBrandsWithMaxDiagonalMoreThan66();
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await db.sequelize.close();
-  }
-}
+const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || '127.0.0.1';
 
-main();
+const httpServer = http.createServer(app);
+
+httpServer.listen(PORT, HOST, () =>
+  console.log(`Server is listening http://${HOST}:${PORT}`)
+);

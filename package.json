@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "type": "module",
   "keywords": [],
@@ -12,10 +12,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^5.2.1",
+    "http-errors": "^2.0.1",
     "pg": "^8.22.0",
     "pg-hstore": "^2.3.4",
     "prettier": "^3.9.5",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
