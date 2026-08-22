@@ -1,5 +1,7 @@
 import { BaseError, ValidationError } from 'sequelize';
 import createHttpError from 'http-errors';
+import createError from 'http-errors';
+import multer from 'multer';
 
 export const dbErrorHandler = (err, req, res, next) => {
   if (err instanceof ValidationError) {
@@ -9,6 +11,13 @@ export const dbErrorHandler = (err, req, res, next) => {
 
   if (err instanceof BaseError) {
     next(createHttpError(500, 'Database Error'));
+  }
+  next(err);
+};
+
+export const multerErrorHandler = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    return next(createError(500, 'Multer Error'));
   }
   next(err);
 };

@@ -100,3 +100,41 @@ export async function deletePhoneById(req, res, next) {
     next(err);
   }
 }
+
+export async function uploadPhoneImage(req, res, next) {
+  try {
+    const {
+      file,
+      params: { id },
+    } = req;
+
+    if (!file) {
+      return next(createHttpError(422, 'Image is required'));
+    }
+
+    const [updatedPhoneCount, updatedPhones] = await Phone.update(
+      {
+        phoneImage: file.filename,
+      },
+      {
+        where: { id },
+        raw: true,
+        returning: true,
+      }
+    );
+
+    if (!updatedPhoneCount) {
+      return next(createHttpError(404, 'Phone Not Found'));
+    }
+
+    const [updatedPhone] = updatedPhones;
+
+    const { createdAt, updatedAt, ...preparedPhone } = updatedPhone;
+
+    res.status(200).send({
+      data: preparedPhone,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
