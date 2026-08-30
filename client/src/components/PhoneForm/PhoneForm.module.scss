@@ -1,4 +1,4 @@
-// Переменные
+
 $primary-color: #6366f1;
 $primary-hover: #4f46e5;
 $bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
@@ -229,9 +229,9 @@ $error-color: #f87171;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Отступ между спиннером и текстом */
+  gap: 10px;
   padding: 12px 24px;
-  background-color: #007bff; /* Замените на ваш цвет */
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -240,16 +240,16 @@ $error-color: #f87171;
   transition: all 0.2s ease;
 
   &:disabled {
-    background-color: #6c757d; /* Цвет при деактивации */
+    background-color: #6c757d;
     cursor: not-allowed;
   }
 
   .spinner {
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Тусклый круг */
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    border-top-color: #fff; /* Яркая вращающаяся часть */
+    border-top-color: #fff;
     animation: spin 0.8s linear infinite;
   }
 }

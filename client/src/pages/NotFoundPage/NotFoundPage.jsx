@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
+import LinkButton from '../../components/LinkButton/LinkButton.jsx';
+import classes from './NotFoundPage.module.scss';
 
 function NotFoundPage() {
   return (
-    <main>
+    <main className={classes.container}>
       <h1>404</h1>
       <p>Page not found</p>
-
-      <Link to="/phones">Go to phones</Link>
+      <LinkButton to="/phones" content="Go to phones" />
     </main>
   );
 }

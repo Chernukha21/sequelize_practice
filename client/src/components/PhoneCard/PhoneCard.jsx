@@ -55,7 +55,7 @@ function PhoneCard({ phone, onEdit, onDelete, isDeleting, isUpdating }) {
             className={`${classes.btn} ${classes.btnEdit}`}
             title="Edit device"
           >
-            ✏️ Edit
+            Change nfc support
           </button>
         )}
 

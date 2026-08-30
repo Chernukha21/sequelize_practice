@@ -3,13 +3,13 @@ import {
   useGetPhonesQuery,
   useUpdatePhoneMutation,
 } from '../../store/phonesApi.js';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PhoneCard from '../PhoneCard/PhoneCard.jsx';
 import LinkButton from '../LinkButton/LinkButton.jsx';
 import FilterForm from '../FilterForm/FilterForm.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
 import classes from './PhonesList.module.scss';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 const PHONES_PER_PAGE = 6;
 
