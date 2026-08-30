@@ -1,44 +1,83 @@
 import db from '../models/index.js';
 import createHttpError from 'http-errors';
+import { CONSTANTS } from '../constants.js';
+import { Op } from 'sequelize';
 const { Phone } = db;
 
 export async function getPhones(req, res, next) {
-  const { limit, offset } = req.pagination;
   try {
-    const phones = await Phone.findAll({
+    const { limit, offset } = req.pagination;
+    const brand = req.query.brand?.trim();
+
+    const where = {};
+
+    if (brand) {
+      where.brand = {
+        [Op.iLike]: `%${brand}%`,
+      };
+    }
+
+    const { count, rows } = await Phone.findAndCountAll({
+      where,
       raw: true,
       attributes: {
         exclude: ['updatedAt', 'createdAt'],
       },
       limit,
       offset,
-      order: ['id'],
+      order: [['id', 'ASC']],
     });
 
-    return res.json({ data: phones });
+    const page = Math.floor(offset / limit) + 1;
+
+    const totalPages = Math.ceil(count / limit);
+
+    return res.status(200).json({
+      data: rows,
+
+      pagination: {
+        total: count,
+        limit,
+        offset,
+        page,
+        totalPages,
+      },
+    });
   } catch (error) {
     next(error);
   }
 }
 export async function createPhone(req, res, next) {
-  const { body } = req;
-
   try {
-    if (!body || Object.keys(body).length === 0) {
+    if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({
         message: 'Request body is required',
         status: 400,
       });
     }
-    const createdPhone = await Phone.create(body);
-    const { createdAt, updatedAt, ...preparedPhone } = createdPhone.get();
-    if (!preparedPhone) {
-      return next(createHttpError(400, 'Something went wrong'));
-    }
 
-    res.status(201).send({ data: preparedPhone });
-  } catch (err) {
-    next(err);
+    const phoneData = {
+      ...req.body,
+      productionYear: Number(req.body.productionYear),
+      ramSize: Number(req.body.ramSize),
+      screenDiagonal: Number(req.body.screenDiagonal),
+      hasNfc: req.body.hasNfc === 'true',
+      phoneImage: req.file?.filename ?? null,
+    };
+
+    console.log('BODY:', req.body);
+    console.log('FILE:', req.file);
+    console.log('PHONE DATA:', phoneData);
+
+    const createdPhone = await Phone.create(phoneData);
+
+    const { createdAt, updatedAt, ...preparedPhone } = createdPhone.get();
+
+    return res.status(201).json({
+      data: preparedPhone,
+    });
+  } catch (error) {
+    next(error);
   }
 }
 export async function getPhoneById(req, res, next) {
@@ -62,7 +101,6 @@ export async function getPhoneById(req, res, next) {
 export async function updateOrCreatePhone(req, res, next) {
   try {
     const { id } = req.params;
-
     const [updatedRows, [updatedPhone]] = await Phone.update(req.body, {
       where: { id },
       returning: true,
@@ -82,6 +120,46 @@ export async function updateOrCreatePhone(req, res, next) {
     const { createdAt, updatedAt, ...preparedPhone } = createdPhone.get();
 
     return res.status(201).json(preparedPhone);
+  } catch (error) {
+    next(error);
+  }
+}
+export async function updatePhoneById(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const phone = await Phone.findByPk(id);
+
+    if (!phone) {
+      return res.status(404).json({
+        status: 404,
+        message: 'Phone not found',
+      });
+    }
+
+    const changes = Object.fromEntries(
+      Object.entries(req.body).filter(([field]) =>
+        CONSTANTS.ALLOWED_FIELDS.includes(field)
+      )
+    );
+
+    if (Object.keys(changes).length === 0) {
+      return res.status(400).json({
+        status: 400,
+        message: 'No valid fields to update',
+      });
+    }
+
+    const updatedPhone = await phone.update(changes);
+
+    const { createdAt, updatedAt, ...preparedPhone } = updatedPhone.get();
+
+    setTimeout(() => {
+      return res.status(200).json({
+        data: preparedPhone,
+        message: 'Phone updated successfully',
+      });
+    }, 1000);
   } catch (error) {
     next(error);
   }

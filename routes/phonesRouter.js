@@ -5,6 +5,7 @@ import {
   getPhoneById,
   getPhones,
   updateOrCreatePhone,
+  updatePhoneById,
   uploadPhoneImage,
 } from '../constrollers/phoneController.js';
 import { paginatePhones } from '../middleware/pagination.js';
@@ -21,10 +22,11 @@ const phonesRouter = Router();
 phonesRouter
   .route('/')
   .get(paginatePhones, getPhones)
-  .post(validatePhoneBody(createPhoneSchema), createPhone);
+  .post(uploadPhonePhoto, validatePhoneBody(createPhoneSchema), createPhone);
 phonesRouter
   .route('/:id')
   .get(getPhoneById)
+  .patch(updatePhoneById)
   .put(validatePhoneBody(createPhoneSchema), updateOrCreatePhone)
   .delete(deletePhoneById);
 phonesRouter.get('/:id/preorders', getPhonePreorders);
