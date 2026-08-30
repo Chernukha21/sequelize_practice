@@ -1,0 +1,83 @@
+.filters {
+  margin-bottom: 24px;
+}
+
+.filterLabel {
+  display: block;
+  margin-bottom: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filterControls {
+  display: flex;
+  gap: 10px;
+}
+
+.filterInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  outline: none;
+  color: rgba(0, 0, 3, 0.4);
+  caret-color: rgba(129, 82, 82, 0.4);
+  background-color: rgba(255, 255, 255, 0.06);
+  font: inherit;
+}
+.filterInput::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+.filterInput:focus {
+  border-color: #818cf8;
+  background-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+.filterInput:-webkit-autofill {
+  -webkit-text-fill-color: #f8fafc;
+  box-shadow: 0 0 0 1000px #1e1b4b inset;
+}
+
+.filterButton,
+.resetButton,
+.pagination button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background-color: #6366f1;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.filterButton:hover:not(:disabled),
+.resetButton:hover:not(:disabled),
+.pagination button:hover:not(:disabled) {
+  background-color: #4f46e5;
+}
+.filterButton:disabled,
+.resetButton:disabled,
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resetButton {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.resetButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 560px) {
+  .filterControls {
+    flex-wrap: wrap;
+  }
+  .filterInput {
+    flex-basis: 100%;
+  }
+}
+
+/*# sourceMappingURL=FilterForm.module.css.map */

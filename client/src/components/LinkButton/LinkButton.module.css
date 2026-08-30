@@ -1,0 +1,48 @@
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  border-radius: 12px;
+  margin: 0 0 15px 0;
+  color: #dbeafe;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.2));
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+.linkButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(96, 165, 250, 0.75);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(124, 58, 237, 0.35));
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.35), 0 0 20px rgba(59, 130, 246, 0.12);
+}
+.linkButton:active {
+  transform: translateY(0);
+}
+.linkButton:focus-visible {
+  outline: 3px solid rgba(96, 165, 250, 0.35);
+  outline-offset: 3px;
+}
+
+.linkIcon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: rgba(59, 130, 246, 0.3);
+  font-size: 17px;
+  transition: transform 180ms ease;
+}
+.linkButton:hover .linkIcon {
+  transform: translateX(-3px);
+}
+
+/*# sourceMappingURL=LinkButton.module.css.map */

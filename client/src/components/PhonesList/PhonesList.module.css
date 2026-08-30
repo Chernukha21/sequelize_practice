@@ -1,0 +1,58 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.title {
+  font-size: 24px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.updatingTag {
+  font-size: 13px;
+  background-color: #ffe4e6;
+  color: #e11d48;
+  padding: 4px 8px;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.errorText {
+  color: #dc2626;
+  text-align: center;
+  background: #fee2e2;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.centerText {
+  text-align: center;
+  padding: 40px;
+  color: #4b5563;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/*# sourceMappingURL=PhonesList.module.css.map */
