@@ -261,7 +261,7 @@ export const PhoneForm = () => {
                 className={`${classes['submit-btn']} ${isSubmitting ? classes['loading'] : ''}`}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
+                {isCreating ? (
                   <>
                     <span className={classes['spinner']}></span>
                     <span>Saving...</span>

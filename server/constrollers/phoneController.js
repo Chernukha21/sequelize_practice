@@ -73,9 +73,11 @@ export async function createPhone(req, res, next) {
 
     const { createdAt, updatedAt, ...preparedPhone } = createdPhone.get();
 
-    return res.status(201).json({
-      data: preparedPhone,
-    });
+    setTimeout(() => {
+      return res.status(201).json({
+        data: preparedPhone,
+      });
+    }, 1500);
   } catch (error) {
     next(error);
   }
