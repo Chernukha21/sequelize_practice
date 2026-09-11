@@ -16,4 +16,5 @@ export const CONSTANTS = {
     'hasNfc',
     'color',
   ],
+  PREORDER_STATUSES: ['pending', 'confirmed', 'done'],
 };

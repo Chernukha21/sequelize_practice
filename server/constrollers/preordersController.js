@@ -1,11 +1,12 @@
 import db from '../models/index.js';
 import createHttpError from 'http-errors';
+import { CONSTANTS } from '../constants.js';
+
 const { Phone, Preorder } = db;
 
 export async function getPreorders(req, res, next) {
   try {
     const { status } = req.query;
-    const PREORDER_STATUSES = ['pending', 'confirmed', 'done'];
 
     const whereCondition = {};
 
@@ -13,7 +14,7 @@ export async function getPreorders(req, res, next) {
       whereCondition.status = status;
     }
 
-    if (status && !PREORDER_STATUSES.includes(status)) {
+    if (status && !CONSTANTS.PREORDER_STATUSES.includes(status)) {
       return next(createHttpError(400, 'Invalid preorder status'));
     }
 
