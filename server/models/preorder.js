@@ -1,4 +1,5 @@
 import { Model } from 'sequelize';
+import { CONSTANTS } from '../constants.js';
 
 export default (sequelize, DataTypes) => {
   class Preorder extends Model {
@@ -15,7 +16,10 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       status: {
-        type: DataTypes.ENUM('pending', 'confirmed', 'done'),
+        type: DataTypes.ENUM(...CONSTANTS.PREORDER_STATUSES),
+        validate: {
+          isIn: [CONSTANTS.PREORDER_STATUSES],
+        },
         allowNull: false,
         defaultValue: 'pending',
       },

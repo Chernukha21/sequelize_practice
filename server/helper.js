@@ -24,58 +24,56 @@ const { Student, sequelize } = db;
 // }
 
 try {
-    // const users = await Student.findAll({ raw: true });
-    // const student = await Student.findByPk(1, { raw: true });
-    // const studentsNames = await Student.findAll({
-    //   raw: true,
-    //   attributes: ['id', 'firstName'],
-    // });
-    // console.log(studentsNames);
-    // const studentsNames = await Student.findAll({
-    //   raw: true,
-    //   attributes: { exclude: ['createdAt', 'updatedAt'] },
-    // });
-    // const studentsNames = await Student.findAll({
-    //   raw: true,
-    //   order: [['activity', 'DESC']],
-    // });
-    // const studentsNames = await Student.findAll({
-    //   raw: true,
-    //   order: [['activity', 'DESC']],
-    //   limit: 1,
-    //   offset: 1,
-    // });
-    // console.log(studentsNames);
-    // const studentsNames = await Student.findAll({
-    //   raw: true,
-    //   order: [['firstName']],
-    //   limit: 3,
-    //   offset: 2,
-    // });
-    // console.log(studentsNames);
-    // const studentById = await Student.findOne({
-    //   where: {
-    //     isMale: false,
-    //     activity: 2,
-    //   },
-    //   raw: true,
-    // });
-    // const studentsCount = await Student.findAll({
-    //   raw: true,
-    //   attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'studentsCount']],
-    // });
-    const updatedStudent = await Student.update(
-        { firstName: 'Jason' },
-        {
-            raw: true,
-            where: {
-                firstName: 'John',
-            },
-            returning: true,
-        }
-    );
-    console.log(updatedStudent);
+  // const users = await Student.findAll({ raw: true });
+  // const student = await Student.findByPk(1, { raw: true });
+  // const studentsNames = await Student.findAll({
+  //   raw: true,
+  //   attributes: ['id', 'firstName'],
+  // });
+  // console.log(studentsNames);
+  // const studentsNames = await Student.findAll({
+  //   raw: true,
+  //   attributes: { exclude: ['createdAt', 'updatedAt'] },
+  // });
+  // const studentsNames = await Student.findAll({
+  //   raw: true,
+  //   order: [['activity', 'DESC']],
+  // });
+  // const studentsNames = await Student.findAll({
+  //   raw: true,
+  //   order: [['activity', 'DESC']],
+  //   limit: 1,
+  //   offset: 1,
+  // });
+  // console.log(studentsNames);
+  // const studentsNames = await Student.findAll({
+  //   raw: true,
+  //   order: [['firstName']],
+  //   limit: 3,
+  //   offset: 2,
+  // });
+  // console.log(studentsNames);
+  // const studentById = await Student.findOne({
+  //   where: {
+  //     isMale: false,
+  //     activity: 2,
+  //   },
+  //   raw: true,
+  // });
+  // const studentsCount = await Student.findAll({
+  //   raw: true,
+  //   attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'studentsCount']],
+  // });
+  const updatedStudent = await Student.update(
+    { firstName: 'Jason' },
+    {
+      raw: true,
+      where: {
+        firstName: 'John',
+      },
+      returning: true,
+    }
+  );
 } catch (e) {
-    console.log(e);
-    throw e;
+  throw e;
 }

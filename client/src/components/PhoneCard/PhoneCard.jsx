@@ -52,6 +52,7 @@ function PhoneCard({ phone, onEdit, onDelete, isDeleting, isUpdating }) {
           <button
             type="button"
             onClick={() => onEdit(phone)}
+            disabled={isUpdating || isDeleting}
             className={`${classes.btn} ${classes.btnEdit}`}
             title="Edit device"
           >
@@ -64,7 +65,7 @@ function PhoneCard({ phone, onEdit, onDelete, isDeleting, isUpdating }) {
           onClick={() => onDelete(phone.id)}
           className={`${classes.btn} ${classes.btnDelete}`}
           title="Delete device"
-          disabled={isDeleting}
+          disabled={isDeleting || isUpdating}
         >
           {isDeleting ? 'Deleting...' : '🗑️ Delete'}
         </button>

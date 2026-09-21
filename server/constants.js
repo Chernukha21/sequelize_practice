@@ -4,8 +4,15 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const PREORDER_STATUS = {
+  PENDING: 'pending',
+  CONFIRMED: 'confirmed',
+  DONE: 'done',
+};
+
 export const CONSTANTS = {
   STATIC_PATH: path.join(__dirname, process.env.STATIC_FOLDER),
+
   ALLOWED_FIELDS: [
     'model',
     'brand',
@@ -16,5 +23,7 @@ export const CONSTANTS = {
     'hasNfc',
     'color',
   ],
-  PREORDER_STATUSES: ['pending', 'confirmed', 'done'],
+
+  PREORDER_STATUS,
+  PREORDER_STATUSES: Object.values(PREORDER_STATUS),
 };

@@ -13,8 +13,6 @@ export async function createPhone() {
     screenDiagonal: 6.1,
     hasNfc: true,
   });
-
-  console.log(phone.toJSON());
 }
 
 export async function getPhonesPage3() {
@@ -29,7 +27,6 @@ export async function getPhonesPage3() {
     offset,
   });
 
-  console.log(phonesByYear);
   return phonesByYear;
 }
 
@@ -41,7 +38,7 @@ export async function getCurrentYearPhones() {
       productionYear: currentYear,
     },
   });
-  console.log(modernPhones);
+
   return modernPhones;
 }
 
@@ -55,7 +52,6 @@ export async function getPhonesBefore2023() {
     },
   });
 
-  console.log(phonesBefore2023);
   return phonesBefore2023;
 }
 
@@ -68,8 +64,6 @@ export async function updateRamSizeById() {
       returning: true,
     }
   );
-
-  console.log(updatedPhone[1][0]);
 }
 
 export async function addNfcToPhones2024() {
@@ -83,7 +77,6 @@ export async function addNfcToPhones2024() {
       returning: true,
     }
   );
-  console.log(UpdateNfcToPhonesIn2024[1][0]);
 }
 
 export async function deletePhoneById() {
@@ -92,7 +85,6 @@ export async function deletePhoneById() {
       id: 2,
     },
   });
-  console.log(deletedPhone);
 }
 
 export async function deletePhonesByYear2016() {
@@ -101,13 +93,11 @@ export async function deletePhonesByYear2016() {
       productionYear: 2016,
     },
   });
-  console.log(deletedPhones);
 }
 
 export async function getAverageRamSize() {
   const averageRamSize = await Phone.aggregate('ramSize', 'AVG');
 
-  console.log(averageRamSize);
   return averageRamSize;
 }
 
@@ -121,7 +111,6 @@ export async function getPhonesCountByBrand() {
     group: ['brand'],
   });
 
-  console.log(phonesByBrand);
   return phonesByBrand;
 }
 
@@ -138,6 +127,5 @@ export async function getBrandsWithMaxDiagonalMoreThan66() {
     group: ['brand'],
     having: db.sequelize.literal('MAX("screenDiagonal") > 6.6'),
   });
-  console.log(brands);
   return brands;
 }

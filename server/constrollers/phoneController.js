@@ -65,10 +65,6 @@ export async function createPhone(req, res, next) {
       phoneImage: req.file?.filename ?? null,
     };
 
-    console.log('BODY:', req.body);
-    console.log('FILE:', req.file);
-    console.log('PHONE DATA:', phoneData);
-
     const createdPhone = await Phone.create(phoneData);
 
     const { createdAt, updatedAt, ...preparedPhone } = createdPhone.get();

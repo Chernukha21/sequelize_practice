@@ -15,7 +15,8 @@ const PHONES_PER_PAGE = 6;
 
 function PhonesList() {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const [updatingPhoneId, setUpdatingPhoneId] = useState(null);
+  const [deletingPhoneId, setDeletingPhoneId] = useState(null);
   const pageFromUrl = Number(searchParams.get('page'));
 
   const page =
@@ -60,16 +61,20 @@ function PhonesList() {
       return;
     }
 
+    setDeletingPhoneId(id);
+
     try {
       await deletePhone(id).unwrap();
     } catch (error) {
-      console.error('Failed to delete phone:', error);
-
       window.alert(error.data?.message ?? 'Failed to delete phone');
+    } finally {
+      setDeletingPhoneId(null);
     }
   };
 
   const handleEdit = async (phone) => {
+    setUpdatingPhoneId(phone.id);
+
     try {
       await updatePhone({
         id: phone.id,
@@ -78,9 +83,9 @@ function PhonesList() {
         },
       }).unwrap();
     } catch (error) {
-      console.error('Failed to update phone:', error);
-
       window.alert(error.data?.message ?? 'Failed to update phone');
+    } finally {
+      setUpdatingPhoneId(null);
     }
   };
 
@@ -173,8 +178,8 @@ function PhonesList() {
               phone={phone}
               onEdit={handleEdit}
               onDelete={handleDelete}
-              isDeleting={isDeleting}
-              isUpdating={isUpdating}
+              isDeleting={isDeleting && deletingPhoneId === phone.id}
+              isUpdating={isUpdating && updatingPhoneId === phone.id}
             />
           ))}
         </div>

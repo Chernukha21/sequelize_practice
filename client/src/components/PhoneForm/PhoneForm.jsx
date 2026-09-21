@@ -36,16 +36,10 @@ export const PhoneForm = () => {
       formData.append('phoneImage', values.phoneImage);
     }
 
-    console.log('FORM DATA:', [...formData.entries()]);
-
     try {
       const createdPhone = await createPhone(formData).unwrap();
-
-      console.log('CREATED PHONE:', createdPhone);
-
       resetForm();
     } catch (error) {
-      console.error('CREATE PHONE ERROR:', error);
     } finally {
       setSubmitting(false);
     }
